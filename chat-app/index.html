@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat App</title>
+</head>
+<body>
+  <input type="text" id="message" />
+  <button onclick="sendMessage()">Send</button>
+  <ul id="message-list"></ul>
+
+  <script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>
+  <script>
+
+
+// Establish WebSocket connection
+const socket = new WebSocket('ws://localhost:3000');
+
+// Connection opened
+socket.addEventListener('open', function (event) {
+  console.log('Connected to the WebSocket server');
+});
+
+// Listen for messages from the server
+socket.addEventListener('message', function (event) {
+  console.log('Received message from server:', event.data);
+});
+
+function sendMessage() {
+      const messageInput = document.getElementById('message');
+      const message = messageInput.value;
+      messageInput.value = '';
+
+      socket.send(message);
+    }
+
+// Send a message to the server
+// socket.send('Hello Server!');
+
+    // const socket = io();
+
+    // function sendMessage() {
+    //   const messageInput = document.getElementById('message');
+    //   const message = messageInput.value;
+    //   messageInput.value = '';
+
+    //   socket.emit('chatMessage', message);
+    // }
+
+    // socket.on('chatMessage', (message) => {
+    //   const messageList = document.getElementById('message-list');
+    //   const li = document.createElement('li');
+    //   li.innerText = message;
+    //   messageList.appendChild(li);
+    // });
+  </script>
+</body>
+</html>
