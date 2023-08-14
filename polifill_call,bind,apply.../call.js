@@ -1,10 +1,8 @@
-const person = {
-    firstName: "Md",
-    lastName: "Nad",
-    fullName: function() {
-      return this.firstName + " " + this.lastName;
-    }
-  }
+function fullName() {
+  setTimeout(() => {
+    console.log(this.firstName + " " + this.lastName);
+  })
+}
   const person1 = {
     firstName:"John",
     lastName: "Doe"
@@ -15,8 +13,7 @@ const person = {
   }
   
   // This will return "John Doe":
-  let res = person.fullName.call(person1, "Test", "Value");
-  console.log(res);
+  fullName.call(person1);
 
   Function.prototype.myCall = function(scope, ...rest) {
     let sym = Symbol();
@@ -26,9 +23,6 @@ const person = {
     return res;
     // return this.bind(scope)(...rest);
   }
-  res = person.fullName.myCall(person1);
-  console.log("Res "+res);
-  console.log(person)
-  res = person.fullName();
-  console.log(res);
+  fullName.myCall(person2);
+
 
