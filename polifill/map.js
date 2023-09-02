@@ -4,12 +4,14 @@ let b = a.map((value, index) => {
     return value*value + index;
 });
 console.log(b);
-Array.prototype.myMap = function(cb) {
-    let res = [];
-    for(let index = 0; index < this.length; index++) {
-        res.push(cb(this[index], index));
+if(!Array.prototype.myMap) {
+    Array.prototype.myMap = function(cb) {
+        let res = [];
+        for(let index = 0; index < this.length; index++) {
+            res.push(cb(this[index], index));
+        }
+        return res;
     }
-    return res;
 }
 
 
